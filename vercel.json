@@ -2,15 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "vercel-build.sh",
-      "use": "@vercel/static-build"
-    },
-    {
       "src": "smartedu/wsgi.py",
       "use": "@vercel/python",
       "config": {
         "runtime": "python3.9",
         "maxLambdaSize": "15mb"
+      }
+    },
+    {
+      "src": "vercel-build.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "staticfiles"
       }
     }
   ],
