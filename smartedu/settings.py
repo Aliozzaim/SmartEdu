@@ -84,12 +84,23 @@ WSGI_APPLICATION = 'smartedu.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Use SQLite database in the local environment or a temporary directory in production (Vercel)
+if os.environ.get('VERCEL') == '1':
+    # Vercel environment uses temporary storage for SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join('/tmp', 'db.sqlite3'),
+        }
     }
-}
+else:
+    # Local environment uses the default database file
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
