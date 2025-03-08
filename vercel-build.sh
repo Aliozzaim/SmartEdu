@@ -1,9 +1,18 @@
 #!/bin/bash
 
-# Install dependencies for Python
+# Ensure virtual environment is set up properly on Vercel (if needed)
+echo "Setting up Python environment..."
+python3 -m venv venv
+source env\Scripts\activate
+
+# Install Python dependencies
 echo "Installing Python dependencies..."
 python3 -m pip install --upgrade pip
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt || { echo "Failed to install dependencies."; exit 1; }
 echo "Installed Python dependencies..."
+
 # Run Django collectstatic to gather all static files into the staticfiles directory
-python3 manage.py collectstatic --noinput
+echo "Running collectstatic..."
+python3 manage.py collectstatic --noinput || { echo "collectstatic failed."; exit 1; }
+
+echo "Build completed successfully!"
