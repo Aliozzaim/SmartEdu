@@ -3,7 +3,7 @@
 # Ensure virtual environment is set up properly on Vercel (if needed)
 echo "Setting up Python environment..."
 python3 -m venv venv
-source env\Scripts\activate
+source venv/bin/activate
 
 # Install Python dependencies
 echo "Installing Python dependencies..."
