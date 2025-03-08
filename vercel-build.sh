@@ -1,19 +1,20 @@
 #!/bin/bash
 
-# Ensure virtual environment is activated (optional, if needed)
+# Check for virtual environment
+echo "Checking virtual environment..."
 if [ -z "$VIRTUAL_ENV" ]; then
     echo "Warning: Virtual environment is not activated!"
-    echo "You can activate it by running 'source /path/to/venv/bin/activate'"
     exit 1
 fi
 
-# Install dependencies for Python
+# Install Python dependencies
 echo "Installing Python dependencies..."
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements.txt || { echo "Failed to install dependencies."; exit 1; }
 
-# Run Django collectstatic to gather all static files into the staticfiles directory
-echo "Running Django collectstatic..."
-python manage.py collectstatic --noinput
+# Collect static files
+echo "Running collectstatic..."
+python manage.py collectstatic --noinput || { echo "collectstatic failed."; exit 1; }
 
-echo "Static files collected successfully!"
+echo "Build completed successfully!"
+
