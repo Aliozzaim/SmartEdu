@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ensure virtual environment is set up properly on Vercel (if needed)
-echo "Setting up Python environment...1"
+echo "Setting up Python environment..."
 python3 -m venv venv
 source venv/bin/activate
 
