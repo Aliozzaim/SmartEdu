@@ -19,8 +19,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -40,7 +39,7 @@ ALLOWED_HOSTS = [
 
 # Application definition
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',  # Whitenoise for static files
+    'whitenoise.runserver_nostatic', 
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -88,7 +87,6 @@ WSGI_APPLICATION = 'smartedu.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 if os.environ.get('VERCEL') == '1':
-    # Vercel environment uses temporary storage for SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -133,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Static files directories
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Static files root for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # Whitenoise storage
 
 # Media files

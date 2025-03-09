@@ -5,7 +5,7 @@
       "src": "smartedu/wsgi.py",
       "use": "@vercel/python",
       "config": {
-        "runtime": "python3.13.1",
+        "runtime": "python3.12",
         "maxLambdaSize": "15mb"
       }
     },
